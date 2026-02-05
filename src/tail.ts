@@ -137,8 +137,8 @@ export class LogTailer extends EventEmitter {
 
       let buffer = '';
 
-      stream.on('data', (chunk: string) => {
-        buffer += chunk;
+      stream.on('data', (chunk: Buffer | string) => {
+        buffer += chunk.toString();
       });
 
       stream.on('end', () => {
@@ -206,8 +206,8 @@ export class LogTailer extends EventEmitter {
     let buffer = '';
     let lineNumber = 0;
 
-    stream.on('data', (chunk: string) => {
-      buffer += chunk;
+    stream.on('data', (chunk: Buffer | string) => {
+      buffer += chunk.toString();
       const lines = buffer.split('\n');
 
       // Keep last incomplete line in buffer

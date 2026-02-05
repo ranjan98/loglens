@@ -134,8 +134,8 @@ export class LogWatcher extends EventEmitter {
 
     let buffer = '';
 
-    stream.on('data', (chunk: string) => {
-      buffer += chunk;
+    stream.on('data', (chunk: Buffer | string) => {
+      buffer += chunk.toString();
       const lines = buffer.split('\n');
 
       // Keep the last incomplete line in the buffer
