@@ -1,6 +1,5 @@
 import fs from 'fs';
 import { EventEmitter } from 'events';
-import readline from 'readline';
 import path from 'path';
 
 export interface TailOptions {

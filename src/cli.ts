@@ -168,7 +168,7 @@ program
   .description('Start web dashboard with live log updates')
   .argument('<files...>', 'Log files to monitor')
   .option('-p, --port <number>', 'Port to run dashboard on', '3000')
-  .option('-h, --host <host>', 'Host to bind to', 'localhost')
+  .option('-H, --host <host>', 'Host to bind to', 'localhost')
   .option('--include <patterns...>', 'Only show lines matching these patterns')
   .option('--exclude <patterns...>', 'Exclude lines matching these patterns')
   .option('--highlight <patterns...>', 'Highlight text matching these patterns')

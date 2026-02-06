@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import colors from 'ansi-colors';
 
 export interface FilterOptions {
   include?: string[];
@@ -26,23 +25,24 @@ export class LogFilter {
   constructor(options: FilterOptions = {}) {
     this.caseSensitive = options.caseSensitive || false;
 
-    const flags = this.caseSensitive ? 'g' : 'gi';
+    const testFlags = this.caseSensitive ? '' : 'i';
+    const highlightFlags = this.caseSensitive ? 'g' : 'gi';
 
     if (options.include) {
       this.includePatterns = options.include.map(pattern =>
-        new RegExp(options.regex ? pattern : this.escapeRegex(pattern), flags)
+        new RegExp(options.regex ? pattern : this.escapeRegex(pattern), testFlags)
       );
     }
 
     if (options.exclude) {
       this.excludePatterns = options.exclude.map(pattern =>
-        new RegExp(options.regex ? pattern : this.escapeRegex(pattern), flags)
+        new RegExp(options.regex ? pattern : this.escapeRegex(pattern), testFlags)
       );
     }
 
     if (options.highlight) {
       this.highlightPatterns = options.highlight.map(pattern =>
-        new RegExp(options.regex ? pattern : this.escapeRegex(pattern), flags)
+        new RegExp(options.regex ? pattern : this.escapeRegex(pattern), highlightFlags)
       );
     }
   }
@@ -121,11 +121,6 @@ export class LogFilter {
     // Add filename prefix if multiple files
     if (showFile && parsed.file) {
       formatted += chalk.cyan(`[${parsed.file}] `);
-    }
-
-    // Add timestamp
-    if (parsed.timestamp) {
-      formatted += chalk.gray(parsed.timestamp) + ' ';
     }
 
     // Colorize based on log level
